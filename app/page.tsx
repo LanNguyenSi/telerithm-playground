@@ -125,15 +125,25 @@ export default function Home() {
         <CodeSnippet />
 
         {/* CTA */}
-        <div className="text-center mt-12">
-          <a
-            href="https://demo.telerithm.cloud"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg transition-all"
-          >
-            Open in Telerithm Dashboard →
-          </a>
+        <div className="mt-12 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+          <div className="text-center">
+            <a
+              href="https://demo.telerithm.cloud/logs"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg transition-all"
+            >
+              Open in Telerithm Dashboard →
+            </a>
+          </div>
+          <div className="mt-4 text-center text-sm text-gray-500">
+            <p className="mb-1">Log in with the demo account:</p>
+            <p className="font-mono text-gray-700">
+              <span className="select-all">demo@telerithm.cloud</span>
+              {" / "}
+              <span className="select-all">demo1234</span>
+            </p>
+          </div>
         </div>
 
         {/* Custom Log Modal */}
