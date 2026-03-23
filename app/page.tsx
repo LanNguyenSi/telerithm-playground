@@ -4,12 +4,14 @@ import { useState } from "react";
 import { ScenarioButton } from "@/components/ScenarioButton";
 import { LogCounter } from "@/components/LogCounter";
 import { CodeSnippet } from "@/components/CodeSnippet";
+import { CustomLogModal } from "@/components/CustomLogModal";
 import { runFailedLogin, runSlowCheckout, runNormalTraffic, runPaymentError } from "@/lib/scenarios";
 
 export default function Home() {
   const [logCount, setLogCount] = useState(0);
   const [loading, setLoading] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleScenario = async (scenarioId: string) => {
     setLoading(scenarioId);
@@ -64,6 +66,17 @@ export default function Home() {
 
         {/* Log Counter */}
         <LogCounter count={logCount} />
+
+        {/* Custom Log Button */}
+        <div className="text-center mb-6">
+          <button
+            onClick={() => setModalOpen(true)}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg shadow-md transition-all"
+          >
+            <span className="text-xl">+</span>
+            Send Custom Log
+          </button>
+        </div>
 
         {/* Scenarios Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
@@ -122,6 +135,13 @@ export default function Home() {
             Open in Telerithm Dashboard →
           </a>
         </div>
+
+        {/* Custom Log Modal */}
+        <CustomLogModal
+          isOpen={modalOpen}
+          onClose={() => setModalOpen(false)}
+          onLogSent={() => setLogCount((prev) => prev + 1)}
+        />
       </div>
     </div>
   );
