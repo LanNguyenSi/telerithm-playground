@@ -1,0 +1,24 @@
+services:
+  playground:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - HOSTNAME=0.0.0.0
+      - PORT=3000
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.playground.rule=Host(`play.telerithm.cloud`)"
+      - "traefik.http.routers.playground.entrypoints=websecure"
+      - "traefik.http.routers.playground.tls=true"
+      - "traefik.http.routers.playground.tls.certresolver=letsencrypt"
+      - "traefik.http.services.playground.loadbalancer.server.port=3000"
+
+networks:
+  traefik:
+    external: true
+    name: traefik
