@@ -23,6 +23,8 @@ class TelerithmClient {
   }
 
   async sendLogs(logs: LogEntry[]): Promise<void> {
+    // Add host to all logs if not set
+    const logsWithHost = logs.map(l => ({ host: "play.telerithm.cloud", ...l }));
     const response = await fetch(
       `${this.config.endpoint}/api/v1/ingest/${this.config.sourceId}`,
       {
@@ -31,7 +33,7 @@ class TelerithmClient {
           "X-API-Key": this.config.apiKey,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ logs }),
+        body: JSON.stringify({ logs: logsWithHost }),
       }
     );
 
