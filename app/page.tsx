@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ScenarioButton } from "@/components/ScenarioButton";
 import { LogCounter } from "@/components/LogCounter";
 import { CodeSnippet } from "@/components/CodeSnippet";
-import { runFailedLogin, runSlowCheckout, runNormalTraffic } from "@/lib/scenarios";
+import { runFailedLogin, runSlowCheckout, runNormalTraffic, runPaymentError } from "@/lib/scenarios";
 
 export default function Home() {
   const [logCount, setLogCount] = useState(0);
@@ -27,6 +27,9 @@ export default function Home() {
           break;
         case "normal-traffic":
           count = await runNormalTraffic();
+          break;
+        case "payment-error":
+          count = await runPaymentError();
           break;
       }
       
@@ -63,7 +66,7 @@ export default function Home() {
         <LogCounter count={logCount} />
 
         {/* Scenarios Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           <ScenarioButton
             id="failed-login"
             title="Failed Login"
@@ -92,6 +95,16 @@ export default function Home() {
             service="mixed"
             loading={loading === "normal-traffic"}
             onClick={() => handleScenario("normal-traffic")}
+          />
+          
+          <ScenarioButton
+            id="payment-error"
+            title="Payment Error"
+            description="Card declined, retry fails, order cancelled"
+            logCount={8}
+            service="payment-service"
+            loading={loading === "payment-error"}
+            onClick={() => handleScenario("payment-error")}
           />
         </div>
 

@@ -132,3 +132,61 @@ export async function runNormalTraffic(): Promise<number> {
 
   return logs.length;
 }
+
+export async function runPaymentError(): Promise<number> {
+  const client = getTelerithmClient();
+  
+  const logs: LogEntry[] = [
+    {
+      level: "info",
+      service: "payment-service",
+      message: "Payment initiated",
+      fields: { orderId: "ord_789", amount: 249.99, currency: "EUR" },
+    },
+    {
+      level: "info",
+      service: "payment-service",
+      message: "Calling Stripe API",
+      fields: { orderId: "ord_789", gateway: "stripe" },
+    },
+    {
+      level: "error",
+      service: "payment-service",
+      message: "Stripe API error: card_declined",
+      fields: { orderId: "ord_789", errorCode: "card_declined" },
+    },
+    {
+      level: "error",
+      service: "payment-service",
+      message: "Payment failed: insufficient funds",
+      fields: { orderId: "ord_789", reason: "insufficient_funds" },
+    },
+    {
+      level: "warn",
+      service: "payment-service",
+      message: "Retrying payment (1/2)",
+      fields: { orderId: "ord_789", retryCount: 1 },
+    },
+    {
+      level: "error",
+      service: "payment-service",
+      message: "Retry failed: card_declined again",
+      fields: { orderId: "ord_789", retryCount: 1 },
+    },
+    {
+      level: "error",
+      service: "payment-service",
+      message: "Payment permanently failed — order cancelled",
+      fields: { orderId: "ord_789", finalStatus: "cancelled" },
+    },
+    {
+      level: "info",
+      service: "payment-service",
+      message: "Customer notified of payment failure",
+      fields: { orderId: "ord_789", channel: "email" },
+    },
+  ];
+
+  await client.sendLogs(logs);
+  return logs.length;
+}
