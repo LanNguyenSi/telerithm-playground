@@ -49,6 +49,9 @@ export default function Home() {
       <div className="container mx-auto px-4 py-12">
         {/* Header */}
         <div className="text-center mb-12">
+          <div className="inline-block mb-4 px-3 py-1 bg-amber-100 text-amber-800 text-sm font-medium rounded-full border border-amber-200">
+            🚧 Work in Progress
+          </div>
           <h1 className="text-5xl font-bold text-slate-900 mb-4">
             telerithm playground
           </h1>
