@@ -97,7 +97,7 @@ export function CustomLogModal({ isOpen, onClose, onLogSent }: CustomLogModalPro
         </div>
 
         {/* Form */}
-        <div className="p-6 space-y-4 overflow-y-auto flex-1">
+        <div className="p-6 space-y-4">
           {/* Level */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -221,6 +221,7 @@ export function CustomLogModal({ isOpen, onClose, onLogSent }: CustomLogModalPro
             Close
           </button>
         </div>
+      </div>
       </div>
     </div>
   );
