@@ -136,26 +136,26 @@ export function CustomLogModal({ isOpen, onClose, onLogSent }: CustomLogModalPro
               <label className="mb-1 block text-sm font-medium text-gray-700">Fields</label>
               <div className="space-y-2">
                 {fields.map((field) => (
-                  <div key={field.id} className="flex gap-2">
+                  <div key={field.id} className="flex items-center gap-2">
                     <input
                       type="text"
                       value={field.key}
                       onChange={(e) => handleFieldChange(field.id, "key", e.target.value)}
                       placeholder="key"
-                      className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm"
+                      className="min-w-0 flex-1 rounded-lg border border-gray-300 px-2 py-2 text-sm"
                     />
                     <input
                       type="text"
                       value={field.value}
                       onChange={(e) => handleFieldChange(field.id, "value", e.target.value)}
                       placeholder="value"
-                      className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm"
+                      className="min-w-0 flex-1 rounded-lg border border-gray-300 px-2 py-2 text-sm"
                     />
                     <button
                       onClick={() => handleRemoveField(field.id)}
-                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-red-200 text-lg text-red-600 transition-colors hover:bg-red-50"
+                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-sm text-red-500 transition-colors hover:bg-red-50"
                     >
-                      ×
+                      ✕
                     </button>
                   </div>
                 ))}
