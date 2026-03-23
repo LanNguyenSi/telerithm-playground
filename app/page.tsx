@@ -4,24 +4,39 @@ import { useState } from "react";
 import { ScenarioButton } from "@/components/ScenarioButton";
 import { LogCounter } from "@/components/LogCounter";
 import { CodeSnippet } from "@/components/CodeSnippet";
+import { runFailedLogin, runSlowCheckout, runNormalTraffic } from "@/lib/scenarios";
 
 export default function Home() {
   const [logCount, setLogCount] = useState(0);
   const [loading, setLoading] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const handleScenario = async (scenarioId: string) => {
     setLoading(scenarioId);
+    setError(null);
     
-    // Simulate sending logs (will be replaced with actual SDK calls)
-    const logCounts = {
-      "failed-login": 5,
-      "slow-checkout": 8,
-      "normal-traffic": 100,
-    };
-    
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setLogCount(prev => prev + (logCounts[scenarioId as keyof typeof logCounts] || 0));
-    setLoading(null);
+    try {
+      let count = 0;
+      
+      switch (scenarioId) {
+        case "failed-login":
+          count = await runFailedLogin();
+          break;
+        case "slow-checkout":
+          count = await runSlowCheckout();
+          break;
+        case "normal-traffic":
+          count = await runNormalTraffic();
+          break;
+      }
+      
+      setLogCount(prev => prev + count);
+    } catch (err: any) {
+      setError(err.message || "Failed to send logs");
+      console.error("Scenario error:", err);
+    } finally {
+      setLoading(null);
+    }
   };
 
   return (
@@ -36,6 +51,13 @@ export default function Home() {
             A realistic demo app with telerithm SDK integrated. Trigger scenarios and see logs flow in real-time.
           </p>
         </div>
+
+        {/* Error Display */}
+        {error && (
+          <div className="bg-red-50 border-2 border-red-200 rounded-lg p-4 mb-6 text-red-800">
+            <strong>Error:</strong> {error}
+          </div>
+        )}
 
         {/* Log Counter */}
         <LogCounter count={logCount} />
