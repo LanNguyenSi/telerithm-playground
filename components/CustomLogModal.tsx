@@ -153,9 +153,9 @@ export function CustomLogModal({ isOpen, onClose, onLogSent }: CustomLogModalPro
                     />
                     <button
                       onClick={() => handleRemoveField(field.id)}
-                      className="rounded-lg px-3 py-2 text-red-600 transition-colors hover:bg-red-50"
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-red-200 text-lg text-red-600 transition-colors hover:bg-red-50"
                     >
-                      −
+                      ×
                     </button>
                   </div>
                 ))}
