@@ -52,6 +52,9 @@ export default function Home() {
       <div className="relative mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center">
+          <div className="mb-4 inline-block rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-medium text-accent">
+            Early Preview
+          </div>
           <p className="font-mono text-[11px] uppercase tracking-[0.35em] text-accent">
             Telerithm Playground
           </p>
