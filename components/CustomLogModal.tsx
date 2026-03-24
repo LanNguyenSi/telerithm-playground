@@ -68,31 +68,37 @@ export function CustomLogModal({ isOpen, onClose, onLogSent }: CustomLogModalPro
 
   if (!isOpen) return null;
 
+  const inputClass =
+    "w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none transition focus:border-accent/50";
+
   return (
     <div
-      className="fixed inset-0 z-50 overflow-y-auto bg-black/50"
+      className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm"
       onClick={(e) => e.target === e.currentTarget && onClose()}
       onKeyDown={(e) => e.key === "Escape" && onClose()}
     >
       <div className="flex min-h-full items-center justify-center p-4">
-        <div className="w-full max-w-md rounded-lg bg-white shadow-xl">
-          <div className="flex items-center justify-between border-b border-gray-200 p-5">
-            <h2 className="text-lg font-bold text-gray-900">Send Custom Log</h2>
+        <div className="w-full max-w-md overflow-hidden rounded-xl border border-border bg-surface shadow-2xl">
+          <div className="flex items-center justify-between border-b border-border px-5 py-4">
+            <h2 className="text-[15px] font-semibold text-foreground">Send Custom Log</h2>
             <button
               onClick={onClose}
-              className="text-gray-400 transition-colors hover:text-gray-600"
+              className="text-muted transition hover:text-foreground"
             >
-              ✕
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
             </button>
           </div>
 
           <div className="space-y-4 p-5">
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">Level</label>
+              <label className="mb-1.5 block text-[13px] font-medium text-muted">Level</label>
               <select
                 value={level}
                 onChange={(e) => setLevel(e.target.value as "debug" | "info" | "warn" | "error")}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2"
+                className={inputClass}
               >
                 <option value="debug">debug</option>
                 <option value="info">info</option>
@@ -102,38 +108,40 @@ export function CustomLogModal({ isOpen, onClose, onLogSent }: CustomLogModalPro
             </div>
 
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">Service</label>
+              <label className="mb-1.5 block text-[13px] font-medium text-muted">Service</label>
               <input
                 type="text"
                 value={service}
                 onChange={(e) => setService(e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2"
+                className={inputClass}
               />
             </div>
 
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">Message *</label>
+              <label className="mb-1.5 block text-[13px] font-medium text-muted">
+                Message <span className="text-danger">*</span>
+              </label>
               <textarea
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 rows={3}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2"
+                className={inputClass}
                 placeholder="Connection timeout to Stripe API"
               />
             </div>
 
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">Host</label>
+              <label className="mb-1.5 block text-[13px] font-medium text-muted">Host</label>
               <input
                 type="text"
                 value={host}
                 onChange={(e) => setHost(e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2"
+                className={inputClass}
               />
             </div>
 
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">Fields</label>
+              <label className="mb-1.5 block text-[13px] font-medium text-muted">Fields</label>
               <div className="space-y-2">
                 {fields.map((field) => (
                   <div key={field.id} className="flex items-center gap-2">
@@ -142,26 +150,29 @@ export function CustomLogModal({ isOpen, onClose, onLogSent }: CustomLogModalPro
                       value={field.key}
                       onChange={(e) => handleFieldChange(field.id, "key", e.target.value)}
                       placeholder="key"
-                      className="min-w-0 flex-1 rounded-lg border border-gray-300 px-2 py-2 text-sm"
+                      className={`${inputClass} min-w-0 flex-1`}
                     />
                     <input
                       type="text"
                       value={field.value}
                       onChange={(e) => handleFieldChange(field.id, "value", e.target.value)}
                       placeholder="value"
-                      className="min-w-0 flex-1 rounded-lg border border-gray-300 px-2 py-2 text-sm"
+                      className={`${inputClass} min-w-0 flex-1`}
                     />
                     <button
                       onClick={() => handleRemoveField(field.id)}
-                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-sm text-red-500 transition-colors hover:bg-red-50"
+                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-muted transition hover:bg-danger/10 hover:text-danger"
                     >
-                      ✕
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                      </svg>
                     </button>
                   </div>
                 ))}
                 <button
                   onClick={handleAddField}
-                  className="text-sm font-medium text-blue-600 hover:text-blue-700"
+                  className="text-[13px] font-medium text-accent transition hover:brightness-110"
                 >
                   + Add field
                 </button>
@@ -169,25 +180,25 @@ export function CustomLogModal({ isOpen, onClose, onLogSent }: CustomLogModalPro
             </div>
 
             {success && (
-              <div className="rounded-lg border border-green-200 bg-green-50 p-3 text-sm text-green-800">
-                ✓ Log sent successfully!
+              <div className="rounded-lg border border-accent/30 bg-accent/10 px-3 py-2.5 text-[13px] text-accent">
+                Log sent successfully
               </div>
             )}
           </div>
 
-          <div className="flex gap-3 border-t border-gray-200 p-5">
+          <div className="flex gap-3 border-t border-border p-5">
             <button
               onClick={handleSend}
               disabled={!message.trim() || sending}
-              className="flex-1 rounded-lg bg-blue-600 px-4 py-2 font-medium text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-300"
+              className="flex-1 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-background transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
             >
               {sending ? "Sending..." : "Send Log"}
             </button>
             <button
               onClick={onClose}
-              className="rounded-lg bg-gray-100 px-4 py-2 font-medium text-gray-700 transition-colors hover:bg-gray-200"
+              className="rounded-lg border border-border bg-surface px-4 py-2 text-sm font-medium text-muted transition hover:text-foreground"
             >
-              Close
+              Cancel
             </button>
           </div>
         </div>

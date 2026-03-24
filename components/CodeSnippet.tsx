@@ -7,14 +7,14 @@ export function CodeSnippet() {
 
   const code = `import { TelerithmClient } from "@telerithm/sdk-js";
 
-const t = new TelerithmClient({ 
-  dsn: "https://key@demo.telerithm.cloud/source" 
+const t = new TelerithmClient({
+  dsn: "https://key@demo.telerithm.cloud/source"
 });
 
 // Log an error
-t.error("Payment failed", { 
-  userId: "u_123", 
-  amount: 99.00 
+t.error("Payment failed", {
+  userId: "u_123",
+  amount: 99.00
 });`;
 
   const handleCopy = () => {
@@ -24,20 +24,17 @@ t.error("Payment failed", {
   };
 
   return (
-    <div className="bg-slate-900 rounded-lg shadow-lg p-6 mb-12">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-white">
-          SDK Integration Example
-        </h3>
+    <div className="overflow-hidden rounded-xl border border-border">
+      <div className="flex items-center justify-between bg-surface px-5 py-3">
+        <span className="text-[13px] font-medium text-muted">SDK Integration</span>
         <button
           onClick={handleCopy}
-          className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded text-sm font-medium transition-colors"
+          className="rounded-md border border-border px-2.5 py-1 text-[12px] font-medium text-muted transition hover:text-foreground"
         >
-          {copied ? "Copied!" : "Copy"}
+          {copied ? "Copied" : "Copy"}
         </button>
       </div>
-      
-      <pre className="text-sm text-slate-300 overflow-x-auto">
+      <pre className="overflow-x-auto bg-[#080c10] px-5 py-4 font-mono text-[13px] leading-relaxed text-[#94a3b8]">
         <code>{code}</code>
       </pre>
     </div>
