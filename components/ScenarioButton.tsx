@@ -20,7 +20,7 @@ export function ScenarioButton({
     <button
       onClick={onClick}
       disabled={loading}
-      className="group rounded-xl border border-border bg-surface p-5 text-left transition hover:border-signal/30 hover:bg-surface-hover disabled:cursor-not-allowed disabled:opacity-50"
+      className="group rounded-xl border border-border bg-surface p-5 text-left transition hover:border-accent/30 hover:bg-surface-hover disabled:cursor-not-allowed disabled:opacity-50"
     >
       <h3 className="text-[15px] font-semibold text-foreground">{title}</h3>
       <p className="mt-1 text-[13px] leading-relaxed text-muted">{description}</p>
@@ -31,7 +31,7 @@ export function ScenarioButton({
         </span>
 
         {loading ? (
-          <span className="flex items-center gap-1.5 text-signal">
+          <span className="flex items-center gap-1.5 text-accent">
             <svg className="h-3.5 w-3.5 animate-spin" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
@@ -39,7 +39,7 @@ export function ScenarioButton({
             Sending
           </span>
         ) : (
-          <span className="font-medium text-signal opacity-0 transition group-hover:opacity-100">
+          <span className="font-medium text-accent opacity-0 transition group-hover:opacity-100">
             Run &rarr;
           </span>
         )}

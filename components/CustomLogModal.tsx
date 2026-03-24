@@ -69,7 +69,7 @@ export function CustomLogModal({ isOpen, onClose, onLogSent }: CustomLogModalPro
   if (!isOpen) return null;
 
   const inputClass =
-    "w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none transition focus:border-signal/50";
+    "w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none transition focus:border-accent/50";
 
   return (
     <div
@@ -172,7 +172,7 @@ export function CustomLogModal({ isOpen, onClose, onLogSent }: CustomLogModalPro
                 ))}
                 <button
                   onClick={handleAddField}
-                  className="text-[13px] font-medium text-signal transition hover:brightness-110"
+                  className="text-[13px] font-medium text-accent transition hover:brightness-110"
                 >
                   + Add field
                 </button>
@@ -180,7 +180,7 @@ export function CustomLogModal({ isOpen, onClose, onLogSent }: CustomLogModalPro
             </div>
 
             {success && (
-              <div className="rounded-lg border border-signal/30 bg-signal/10 px-3 py-2.5 text-[13px] text-signal">
+              <div className="rounded-lg border border-accent/30 bg-accent/10 px-3 py-2.5 text-[13px] text-accent">
                 Log sent successfully
               </div>
             )}
@@ -190,7 +190,7 @@ export function CustomLogModal({ isOpen, onClose, onLogSent }: CustomLogModalPro
             <button
               onClick={handleSend}
               disabled={!message.trim() || sending}
-              className="flex-1 rounded-lg bg-signal px-4 py-2 text-sm font-semibold text-background transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex-1 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-background transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
             >
               {sending ? "Sending..." : "Send Log"}
             </button>
