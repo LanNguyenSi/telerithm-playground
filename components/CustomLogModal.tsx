@@ -190,7 +190,7 @@ export function CustomLogModal({ isOpen, onClose, onLogSent }: CustomLogModalPro
             <button
               onClick={handleSend}
               disabled={!message.trim() || sending}
-              className="flex-1 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-background transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex-1 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
             >
               {sending ? "Sending..." : "Send Log"}
             </button>

@@ -20,7 +20,7 @@ export function ScenarioButton({
     <button
       onClick={onClick}
       disabled={loading}
-      className="group rounded-xl border border-border bg-surface p-5 text-left transition hover:border-accent/30 hover:bg-surface-hover disabled:cursor-not-allowed disabled:opacity-50"
+      className="group rounded-xl border border-border bg-surface p-5 text-left shadow-sm transition hover:border-accent/40 hover:shadow-md disabled:cursor-not-allowed disabled:opacity-50"
     >
       <h3 className="text-[15px] font-semibold text-foreground">{title}</h3>
       <p className="mt-1 text-[13px] leading-relaxed text-muted">{description}</p>
