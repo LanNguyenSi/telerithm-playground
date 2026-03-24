@@ -4,12 +4,12 @@ interface LogCounterProps {
 
 export function LogCounter({ count }: LogCounterProps) {
   return (
-    <div className="bg-white rounded-xl shadow-lg p-8 mb-12 text-center border-2 border-blue-100">
-      <div className="text-6xl font-bold text-blue-600 mb-2 tabular-nums">
+    <div className="flex items-center justify-center gap-4 rounded-xl border border-border bg-surface px-6 py-5">
+      <div className="font-mono text-4xl font-semibold tabular-nums text-signal">
         {count.toLocaleString()}
       </div>
-      <div className="text-lg text-slate-600">
-        logs sent to Telerithm
+      <div className="text-sm text-muted">
+        logs sent
       </div>
     </div>
   );
